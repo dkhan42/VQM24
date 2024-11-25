@@ -1,0 +1,52 @@
+
+#1ST PASS
+molecule {
+}
+set {
+	g_convergence GAU_TIGHT
+	scf_type df
+	geom_maxiter 100
+	basis cc-pvdz
+}
+
+optimize('wb97x-d3')
+frequencies('wb97x-d3')
+
+
+#2ND PASS
+molecule {
+symmetry c1
+}
+set {
+	g_convergence GAU_TIGHT
+	scf_type df
+	dft_spherical_points 590
+	dft_radial_points 99
+	maxiter 200
+	SOSCF TRUE
+	geom_maxiter 100
+	basis cc-pvdz
+}
+
+optimize('wb97x-d3')
+frequencies('wb97x-d3')
+
+#3RD PASS
+molecule {
+symmetry c1
+}
+set {
+	g_convergence GAU_TIGHT
+	scf_type df
+	dft_spherical_points 590
+	dft_radial_points 99
+	maxiter 200
+	SOSCF TRUE
+    full_hess_every 20
+    OPT_COORDINATES CARTESIAN
+	geom_maxiter 50
+	basis cc-pvdz
+}
+
+optimize('wb97x-d3')
+frequencies('wb97x-d3')
