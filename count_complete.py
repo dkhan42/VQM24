@@ -10,7 +10,7 @@ converged = 0
 incomplete = []
 
 for line in tqdm(lines):
-    if 'I' in line:
+    if 'I' in line: #Iodine was originally included in the dataset but eventually discarded
          pass
     else:
         try:
