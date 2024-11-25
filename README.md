@@ -1,2 +1,2 @@
 # VQM24
-Tools used for generating and analyzing the VQM24 dataset
+Some tools used for generating the VQM24 dataset
