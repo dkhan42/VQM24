@@ -1,0 +1,16 @@
+molecule {
+symmetry c1
+}
+set {
+	g_convergence GAU_TIGHT
+	scf_type df
+	dft_spherical_points 590
+	dft_radial_points 99
+	maxiter 200
+	geom_maxiter 100
+	basis cc-pvdz
+       MOLDEN_WRITE TRUE
+}
+
+E, wfn = energy('wb97x-d3', return_wfn=True)
+oeprop(wfn, 'DIPOLE', 'MULTIPOLE(4)', 'ESP_AT_NUCLEI', 'MULLIKEN_CHARGES')
