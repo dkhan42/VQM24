@@ -2,7 +2,7 @@ from itertools import combinations_with_replacement as cr
 import os
 import numpy as np
 import leruli
-valency={'C':4,'O':2,'Sx':4,'Sy':6,'Nx':5,'F':1,'Si':4,'P':3,'Px':5,'S':2,'Cl':1,'Br':1}
+valency={'C':4,'O':2,'Sx':4,'Sy':6,'N':3,'Nx':5,'F':1,'Si':4,'P':3,'Px':5,'S':2,'Cl':1,'Br':1}
 file0=open('failed2.txt','w')
 file2=open('submitted2.txt','w')
 for i in range(6):
