@@ -1,3 +1,8 @@
+'''
+Psi4 template file for post-optimization single-point SCF calculation at the same level of theory.
+These calculations were performed for all molecules in order to store the wavefunction (and a few additional properties)
+'''
+
 molecule {
 symmetry c1
 }
