@@ -1,3 +1,8 @@
+'''
+Psi4 input file templates for the geometry optimization and frequency calculation.
+The three input files below correspond to the the three passes in which the optimization was performed as described in the manuscript.
+'''
+
 
 #1ST PASS
 molecule {
