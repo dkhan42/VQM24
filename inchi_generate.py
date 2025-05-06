@@ -1,3 +1,7 @@
+'''
+This script generates the Inchi strings for a molecule using its geometry through the OpenBabel library
+'''
+
 import numpy as np
 from tqdm import tqdm
 from ase.io import write
@@ -11,13 +15,16 @@ charges, coords, scfe = data['atoms'], data['geometries'], data['scf_energies']
 
 inchiob, inchiob2 = [], []
 for i in tqdm(range(len(charges))):
+    #Create Atoms object using ASE
     atoms = Atoms(numbers = charges[i], positions=coords[i])
     write('temp.xyz', atoms)
+    
     # Read XYZ file
     obConversion = openbabel.OBConversion()
     obConversion.SetInFormat("xyz")
     mol = openbabel.OBMol()
     obConversion.ReadFile(mol, "temp.xyz")
+    
     # Convert to SMILES
     obConversion.SetOutFormat("inchi")
     smiles = obConversion.WriteString(mol)
@@ -26,12 +33,14 @@ for i in tqdm(range(len(charges))):
 
     atoms = Atoms(numbers = charges[i], positions=-coords[i])
     write('temp.xyz', atoms)
+    
     # Read XYZ file
     obConversion = openbabel.OBConversion()
     obConversion.SetInFormat("xyz")
     mol = openbabel.OBMol()
     obConversion.ReadFile(mol, "temp.xyz")
-    # Convert to SMILES
+    
+    # Convert to InCHI
     obConversion.SetOutFormat("inchi")
     smiles = obConversion.WriteString(mol)
     smiles = smiles.strip().split('\t')[0]
