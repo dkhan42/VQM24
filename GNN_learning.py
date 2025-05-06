@@ -126,7 +126,7 @@ if rep=='painn':
         radial_basis=radial_basis,
         cutoff_fn=spk.nn.CosineCutoff(cutoff)
     )
-elif rep=='schnet'
+elif rep=='schnet':
     model = spk.representation.SchNet(
             n_atom_basis=n_atom_basis,
             n_interactions=3,
