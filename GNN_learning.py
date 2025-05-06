@@ -119,12 +119,20 @@ cutoff = 5.
 n_atom_basis = 128
 radial_basis = spk.nn.GaussianRBF(n_rbf=20, cutoff=cutoff)
 
-painn = spk.representation.PaiNN(
-    n_atom_basis=n_atom_basis,
-    n_interactions=3,
-    radial_basis=radial_basis,
-    cutoff_fn=spk.nn.CosineCutoff(cutoff)
-)
+if rep=='painn':
+    painn = spk.representation.PaiNN(
+        n_atom_basis=n_atom_basis,
+        n_interactions=3,
+        radial_basis=radial_basis,
+        cutoff_fn=spk.nn.CosineCutoff(cutoff)
+    )
+elif rep=='schnet'
+    painn = spk.representation.SchNet(
+            n_atom_basis=n_atom_basis,
+            n_interactions=3,
+            radial_basis=radial_basis,
+            cutoff_fn=spk.nn.CosineCutoff(cutoff)
+        )
 
 output_key = "y"  # name of the key storing labels in the batch
 pred_layer = spk.atomistic.Atomwise(n_in=n_atom_basis, output_key=output_key)
