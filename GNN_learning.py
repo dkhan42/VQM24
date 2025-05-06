@@ -120,14 +120,14 @@ n_atom_basis = 128
 radial_basis = spk.nn.GaussianRBF(n_rbf=20, cutoff=cutoff)
 
 if rep=='painn':
-    painn = spk.representation.PaiNN(
+    model = spk.representation.PaiNN(
         n_atom_basis=n_atom_basis,
         n_interactions=3,
         radial_basis=radial_basis,
         cutoff_fn=spk.nn.CosineCutoff(cutoff)
     )
 elif rep=='schnet'
-    painn = spk.representation.SchNet(
+    model = spk.representation.SchNet(
             n_atom_basis=n_atom_basis,
             n_interactions=3,
             radial_basis=radial_basis,
@@ -138,7 +138,7 @@ output_key = "y"  # name of the key storing labels in the batch
 pred_layer = spk.atomistic.Atomwise(n_in=n_atom_basis, output_key=output_key)
 
 nnpot = spk.model.NeuralNetworkPotential(
-    representation=painn,
+    representation=model,
     input_modules=[spk.atomistic.PairwiseDistances()],
     output_modules=[pred_layer]
 )
@@ -158,7 +158,7 @@ task = spk.task.AtomisticTask(
 )
 
 # Training config
-save_dir = "./painn_vqm24"
+save_dir = f"./{rep}_vqm24"
 os.makedirs(save_dir, exist_ok=True)
 
 logger = pl.loggers.TensorBoardLogger(save_dir=save_dir)
@@ -201,7 +201,7 @@ for mol in tqdm(mols,desc='Predictions',position=0):  # test set
 preds = np.array(preds)
 mae = np.mean(np.abs(preds - labels[testinds]))
 
-file = open("painn_vqm24.txt", "a")
+file = open(f"{rep}_vqm24.txt", "a")
 file.write(f"Seed : {seed}, Train size : {trainsize}, Test size : {len(testinds)}\n")
 file.write(f"Test MAE [kcal/mol]: {mae*ev2kcal}\n")
 file.write(f"Test MAE [eV]: {mae}\n")
