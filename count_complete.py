@@ -1,3 +1,7 @@
+'''
+This script counts and records the molecule for which the DFT optimization converged successfully by simply checking the final message printed by Psi4 in the log file. 
+'''
+
 file = open('paths.txt','r')
 lines=file.readlines()
 file.close()
