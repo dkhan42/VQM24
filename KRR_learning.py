@@ -21,7 +21,7 @@ uniques = np.unique(np.concatenate(charges))
 #generate fchl19 representation for all molecules
 fchl = np.array([generate_fchl_acsf(q,r,uniques,pad=max([len(arr) for arr in charges]),nRs2=10,nRs3=8) for q,r in zip(charges,coords)])
 
-def return_errs(rep, labels):
+def return_errsCV(rep, labels):
   '''
   Returns 5-fold cross-validated learning curves using KRR and the provided representation
   '''
