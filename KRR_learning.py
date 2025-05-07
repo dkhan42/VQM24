@@ -13,7 +13,7 @@ data = np.load('DFT_uniques.npz',allow_pickle = True)
 charges, coords, labels = data['atoms'], data['coordinates'], data['Eatomization']*627.5 #Hartree to kcal/mol conversion of atomization energies
 
 #generate cmbdf representation for all molecules
-cmbdf = generate_mbdf(charges,coords,progress_bar=True,local=False)
+cmbdf = generate_mbdf(charges,coords,progress_bar=True)
 
 #get list of unique chemical elements in the dataset (required for fchl19)
 uniques = np.unique(np.concatenate(charges))
